@@ -35,10 +35,14 @@ describe('PriceService', () => {
 			// PackageService.updatePackagePrice(basic, 100_00, 'Stockholm', date),
 		]);
 
-		expect(await PriceService.getPriceHistory()).toBe({
+		const expectedResult = {
 			Göteborg: [30_00],
 			Stockholm: [40_00, 100_00],
-		});
+		};
+
+		const result = await PriceService.getPriceHistory();
+
+		expect(result).toBe(expectedResult);
 	});
 
 	it('Supports filtering on municipality', async () => {
