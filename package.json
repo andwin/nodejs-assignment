@@ -7,7 +7,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "tsc --noEmit && jest --runInBand",
+    "test": "tsc --noEmit && xo && jest --runInBand",
     "start": "ts-node index.ts",
     "dev": "ts-node-dev --respawn --transpile-only index.ts"
   },
