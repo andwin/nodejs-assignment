@@ -1,4 +1,6 @@
-import {type CreationOptional, DataTypes, type ForeignKey, type InferAttributes, type InferCreationAttributes, Model} from 'sequelize';
+import {
+	type CreationOptional, DataTypes, type ForeignKey, type InferAttributes, type InferCreationAttributes, Model,
+} from 'sequelize';
 import {sequelizeConnection} from '../db/config';
 import {type Package} from './package';
 

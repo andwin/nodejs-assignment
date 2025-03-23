@@ -1,4 +1,6 @@
-import {type Association, type CreationOptional, DataTypes, type InferAttributes, type InferCreationAttributes, Model, type NonAttribute} from 'sequelize';
+import {
+	type Association, type CreationOptional, DataTypes, type InferAttributes, type InferCreationAttributes, Model, type NonAttribute,
+} from 'sequelize';
 import {sequelizeConnection} from '../db/config';
 import {Price} from './price';
 
