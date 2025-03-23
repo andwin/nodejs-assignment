@@ -49,7 +49,19 @@
     ]
   },
   "xo": {
-    "import/extensions": false,
+    "rules": {
+      "import/extensions": "off",
+      "n/file-extension-in-import": "off",
+      "@typescript-eslint/naming-convention": ["error", {
+        "selector": "property",
+        "format": ["strictCamelCase"],
+        "filter": {
+          "regex": "^(Göteborg|Stockholm)$",
+          "match": false
+        }
+      }],
+      "unicorn/numeric-separators-style": "off"
+    },
     "import/no-cycle": false
   }
 }
