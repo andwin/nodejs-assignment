@@ -15,7 +15,7 @@ const packageService = {
 			const newPackage = await sequelizeConnection.transaction(async t => {
 				await Price.create({
 					packageId: pack.id,
-					priceCents: pack.priceCents,
+					priceCents: newPriceCents,
 					municipality,
 				}, {transaction: t});
 
@@ -30,19 +30,16 @@ const packageService = {
 		}
 	},
 	async priceFor(municipality: string) {
-		const foundPackage = await Package.findOne({
-			include: {
-				model: Price,
-				as: 'prices',
-				where: {municipality},
-			},
+		const foundPrice = await Price.findOne({
+			where: {municipality},
+			order: [['createdAt', 'DESC']],
 		});
 
-		if (!foundPackage) {
+		if (!foundPrice) {
 			return null;
 		}
 
-		return foundPackage.priceCents;
+		return foundPrice.priceCents;
 	},
 };
 
