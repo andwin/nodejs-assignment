@@ -16,6 +16,7 @@ const priceService = {
 					[Op.lt]: endOfYear,
 				},
 			},
+			order: [['priceDate', 'ASC']],
 		});
 
 		const transformedPrices = transformPriceHistory(foundPrices);
