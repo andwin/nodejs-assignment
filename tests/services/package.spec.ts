@@ -41,7 +41,7 @@ describe('PackageService', () => {
 	it.skip('Supports adding a price for a specific municipality', async () => {
 		const pack = await Package.create({name: 'Dunderhonung', priceCents: 0});
 
-		// await packageService.updatePackagePrice(pack, 200_00, 'Göteborg');
+		// Await packageService.updatePackagePrice(pack, 200_00, 'Göteborg');
 
 		const response = await packageService.priceFor('Göteborg');
 
