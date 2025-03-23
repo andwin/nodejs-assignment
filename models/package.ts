@@ -17,7 +17,7 @@ class Package extends Model<InferAttributes<Package>, InferCreationAttributes<Pa
 
 Package.init({
 	id: {
-		type: DataTypes.INTEGER.UNSIGNED,
+		type: DataTypes.INTEGER,
 		autoIncrement: true,
 		primaryKey: true,
 	},
