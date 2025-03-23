@@ -10,9 +10,9 @@ export const seedDb = async () => {
 		{name: 'premium', priceCents: 111_100},
 	], {validate: true});
 
-	const basic = await Package.findOne({where: {name: 'basic'}}) as Package;
-	const plus = await Package.findOne({where: {name: 'plus'}}) as Package;
-	const premium = await Package.findOne({where: {name: 'premium'}}) as Package;
+	const basic = (await Package.findOne({where: {name: 'basic'}}))!;
+	const plus = (await Package.findOne({where: {name: 'plus'}}))!;
+	const premium = (await Package.findOne({where: {name: 'premium'}}))!;
 
 	await Price.bulkCreate([
 		{priceCents: 5000, packageId: basic.id},
