@@ -8,6 +8,7 @@ class Price extends Model<InferAttributes<Price>, InferCreationAttributes<Price>
 	declare id: CreationOptional<number>;
 	declare priceCents: number;
 	declare municipality: string | undefined;
+	declare priceDate: CreationOptional<Date>;
 	declare packageId: ForeignKey<Package['id']>;
 
 	declare createdAt: CreationOptional<Date>;
@@ -26,6 +27,10 @@ Price.init({
 	},
 	municipality: {
 		type: DataTypes.STRING,
+		allowNull: true,
+	},
+	priceDate: {
+		type: DataTypes.DATE,
 		allowNull: true,
 	},
 	createdAt: DataTypes.DATE,
