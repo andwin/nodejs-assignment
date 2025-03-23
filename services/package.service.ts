@@ -30,7 +30,13 @@ const packageService = {
 		}
 	},
 	async priceFor(municipality: string) {
-		const foundPackage = await Package.findOne({where: {name: municipality}});
+		const foundPackage = await Package.findOne({
+			include: {
+				model: Price,
+				as: 'prices',
+				where: {municipality},
+			},
+		});
 
 		if (!foundPackage) {
 			return null;
