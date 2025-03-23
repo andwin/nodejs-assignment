@@ -16,23 +16,19 @@ describe('PriceService', () => {
 		await database.close();
 	});
 
-	it.skip('Returns the pricing history for the provided year and package', async () => {
+	it('Returns the pricing history for the provided year and package', async () => {
 		const basic = await Package.create({name: 'basic', priceCents: 20_00});
 
-		const date = new Date();
-
 		// These should NOT be included
-		date.setFullYear(2019);
 		await Promise.all([
-			// PackageService.updatePackagePrice(basic, 20_00, 'Göteborg', date),
-			// PackageService.updatePackagePrice(basic, 30_00, 'Stockholm', date),
+			PackageService.updatePackagePrice(basic, 20_00, 'Göteborg', new Date(2019, 0, 1)),
+			PackageService.updatePackagePrice(basic, 30_00, 'Stockholm', new Date(2019, 0, 1)),
 		]);
 
-		date.setFullYear(2020);
 		await Promise.all([
-			// PackageService.updatePackagePrice(basic, 30_00, 'Göteborg', date),
-			// PackageService.updatePackagePrice(basic, 40_00, 'Stockholm', date),
-			// PackageService.updatePackagePrice(basic, 100_00, 'Stockholm', date),
+			PackageService.updatePackagePrice(basic, 30_00, 'Göteborg', new Date(2020, 0, 1)),
+			PackageService.updatePackagePrice(basic, 40_00, 'Stockholm', new Date(2020, 0, 1)),
+			PackageService.updatePackagePrice(basic, 100_00, 'Stockholm', new Date(2020, 0, 2)),
 		]);
 
 		const expectedResult = {
@@ -40,10 +36,9 @@ describe('PriceService', () => {
 			Stockholm: [40_00, 100_00],
 		};
 
-		// eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
-		const result = await PriceService.getPriceHistory();
+		const result = await PriceService.getPriceHistory(basic, 2020);
 
-		expect(result).toBe(expectedResult);
+		expect(result).toEqual(expectedResult);
 	});
 
 	it('Supports filtering on municipality', async () => {
