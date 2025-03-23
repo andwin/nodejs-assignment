@@ -1,7 +1,7 @@
 import {Package} from '../models/package';
 import {Price} from '../models/price';
 
-export const seedDb = async () => {
+export const seedDatabase = async () => {
 	await Package.destroy({truncate: true});
 
 	await Package.bulkCreate([

@@ -1,7 +1,7 @@
 import express from 'express';
 import packagesRoutes from './routes/package.routes';
 import {sequelizeConnection} from './db/config';
-import {seedDb} from './db/seed';
+import {seedDatabase} from './db/seed';
 
 const port = 3000;
 export const app = express();
@@ -16,7 +16,7 @@ app.use(express.json());
 sequelizeConnection.sync({force: true}).then(async () => {
 	console.log('DB running');
 
-	await seedDb();
+	await seedDatabase();
 });
 
 app.use('/api/packages', packagesRoutes);
