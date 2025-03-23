@@ -47,7 +47,7 @@ describe('PackageService', () => {
 		await packageService.updatePackagePrice(basic, 220_00, 'Göteborg');
 		await packageService.updatePackagePrice(basic, 250_00, 'Stockholm');
 
-		const response = await packageService.priceFor('Göteborg');
+		const response = await packageService.priceFor(basic, 'Göteborg');
 
 		expect(response).toBe(220_00);
 	});

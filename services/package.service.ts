@@ -29,9 +29,9 @@ const packageService = {
 			throw new Error('Error handling the transaction');
 		}
 	},
-	async priceFor(municipality: string) {
+	async priceFor(pack: Package, municipality: string) {
 		const foundPrice = await Price.findOne({
-			where: {municipality},
+			where: {packageId: pack.id, municipality},
 			order: [['createdAt', 'DESC']],
 		});
 
