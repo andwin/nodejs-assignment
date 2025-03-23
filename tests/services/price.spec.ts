@@ -44,15 +44,18 @@ describe('PriceService', () => {
 	it('Supports filtering on municipality', async () => {
 		const basic = await Package.create({name: 'basic', priceCents: 2000});
 
-		const date = new Date();
-
-		date.setFullYear(2020);
 		await Promise.all([
-			// PackageService.updatePackagePrice(basic, 20_00, 'Göteborg', date),
-			// PackageService.updatePackagePrice(basic, 30_00, 'Stockholm', date),
-			// PackageService.updatePackagePrice(basic, 100_00, 'Stockholm', date),
+			PackageService.updatePackagePrice(basic, 20_00, 'Göteborg', new Date(2020, 0, 1)),
+			PackageService.updatePackagePrice(basic, 30_00, 'Stockholm', new Date(2020, 0, 1)),
+			PackageService.updatePackagePrice(basic, 100_00, 'Stockholm', new Date(2020, 0, 2)),
 		]);
 
-		// Add some assertions here!
+		const expectedResult = {
+			Stockholm: [30_00, 100_00],
+		};
+
+		const result = await PriceService.getPriceHistory(basic, 2020, 'Stockholm');
+
+		expect(result).toEqual(expectedResult);
 	});
 });
