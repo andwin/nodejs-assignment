@@ -2,7 +2,7 @@ import {sequelizeConnection} from '../db/config';
 import {Package} from '../models/package';
 import {Price} from '../models/price';
 
-export default {
+const packageService = {
 	async getAll() {
 		return Package.findAll({
 			include: [
@@ -38,3 +38,5 @@ export default {
 		return foundPackage.priceCents;
 	},
 };
+
+export default packageService;
