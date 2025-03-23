@@ -40,6 +40,7 @@ describe('PriceService', () => {
 			Stockholm: [40_00, 100_00],
 		};
 
+		// eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
 		const result = await PriceService.getPriceHistory();
 
 		expect(result).toBe(expectedResult);
