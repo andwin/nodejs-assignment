@@ -10,13 +10,14 @@ const packageService = {
 			],
 		});
 	},
-	async updatePackagePrice(pack: Package, newPriceCents: number, municipality?: string) {
+	async updatePackagePrice(pack: Package, newPriceCents: number, municipality?: string, priceDate?: Date) {
 		try {
 			const newPackage = await sequelizeConnection.transaction(async t => {
 				await Price.create({
 					packageId: pack.id,
 					priceCents: newPriceCents,
 					municipality,
+					priceDate,
 				}, {transaction: t});
 
 				pack.priceCents = newPriceCents;
