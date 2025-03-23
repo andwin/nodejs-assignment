@@ -12,6 +12,7 @@ app.listen(port, () => {
 app.use(express.json());
 
 //  Initialize database //
+// eslint-disable-next-line @typescript-eslint/no-floating-promises, unicorn/prefer-top-level-await
 sequelizeConnection.sync({force: true}).then(async () => {
 	console.log('DB running');
 
