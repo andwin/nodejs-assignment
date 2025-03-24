@@ -7,7 +7,7 @@ import {type Package} from './package';
 class Price extends Model<InferAttributes<Price>, InferCreationAttributes<Price>> {
 	declare id: CreationOptional<number>;
 	declare priceCents: number;
-	declare municipality: string | undefined;
+	declare municipality: CreationOptional<string>;
 	declare priceDate: CreationOptional<Date>;
 	declare packageId: ForeignKey<Package['id']>;
 
