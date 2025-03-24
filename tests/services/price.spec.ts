@@ -58,4 +58,27 @@ describe('PriceService', () => {
 
 		expect(result).toEqual(expectedResult);
 	});
+
+	it('Returns the latest price for each package and municipality', async () => {
+		const basic = await Package.create({name: 'basic', priceCents: 20_00});
+		const plus = await Package.create({name: 'plus', priceCents: 59_900});
+		await Promise.all([
+			PackageService.updatePackagePrice(basic, 20_00, 'Göteborg', new Date('2020-01-01')),
+			PackageService.updatePackagePrice(basic, 30_00, 'Stockholm', new Date('2020-01-01')),
+			PackageService.updatePackagePrice(basic, 100_00, 'Stockholm', new Date('2020-01-02')),
+			PackageService.updatePackagePrice(plus, 59_900, 'Göteborg', new Date('2020-01-01')),
+			PackageService.updatePackagePrice(plus, 69_900, 'Stockholm', new Date('2020-01-01')),
+			PackageService.updatePackagePrice(plus, 79_900, 'Stockholm', new Date('2020-01-02')),
+		]);
+		const expectedResult = [
+			{packageId: basic.id, municipality: 'Göteborg', priceCents: 20_00},
+			{packageId: basic.id, municipality: 'Stockholm', priceCents: 100_00},
+			{packageId: plus.id, municipality: 'Göteborg', priceCents: 59_900},
+			{packageId: plus.id, municipality: 'Stockholm', priceCents: 79_900},
+		];
+
+		const result = await PriceService.getPriceList();
+
+		expect(result).toEqual(expectedResult);
+	});
 });
