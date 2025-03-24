@@ -1,5 +1,6 @@
 import express from 'express';
 import packagesRoutes from './routes/package.routes';
+import pricesRoutes from './routes/price.routes';
 import {sequelizeConnection} from './db/config';
 import {seedDatabase} from './db/seed';
 
@@ -20,3 +21,4 @@ sequelizeConnection.sync({force: true}).then(async () => {
 });
 
 app.use('/api/packages', packagesRoutes);
+app.use('/api/prices', pricesRoutes);
