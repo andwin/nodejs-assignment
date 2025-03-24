@@ -1,5 +1,17 @@
 {
 	"editor.detectIndentation": false,
 	"editor.insertSpaces": false,
-	"editor.tabSize": 2
+	"editor.tabSize": 2,
+	"files.insertFinalNewline": true,
+	"files.trimTrailingWhitespace": true,
+	"xo.enable": true,
+	"xo.format.enable": true,
+	"editor.defaultFormatter": "samverschueren.linter-xo",
+	"[typescript]": {
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.fixAll": "explicit"
+		},
+		"editor.defaultFormatter": "samverschueren.linter-xo"
+	}
 }
