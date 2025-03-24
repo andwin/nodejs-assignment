@@ -25,7 +25,7 @@ describe('PackageService', () => {
 		expect(newPackage.priceCents).toBe(200_00);
 	});
 
-	it.skip('Stores the old price of the provided package in its price history', async () => {
+	it('Stores the new price of the provided package in its price history', async () => {
 		const pack = await Package.create({name: 'Dunderhonung', priceCents: 100_00});
 
 		await packageService.updatePackagePrice(pack, 200_00);
@@ -33,7 +33,7 @@ describe('PackageService', () => {
 		const priceHistory = await Price.findAll({where: {packageId: pack.id}});
 
 		expect(priceHistory.length).toBe(1);
-		expect(priceHistory[0].priceCents).toBe(100_00);
+		expect(priceHistory[0].priceCents).toBe(200_00);
 	});
 
 	// This tests cover feature request 1. Feel free to add more tests or change
